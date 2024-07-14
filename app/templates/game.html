@@ -6,7 +6,7 @@
 <body>
     <h3 class="header">Word-El</h3>
     <label for="date" id="date-label">Pick a date:</label>
-    <input type="date" id="date" name="date" min="2021-06-19" max="">
+    <input type="date" id="date" name="date" min="2021-06-19" max="" value="">
     <table>
         <tr class="row">
             <td class="cell">
@@ -152,6 +152,8 @@
     </div>
 </body>
 <script>
-    document.getElementById("date").setAttribute("max", new Date().toISOString().slice(0, 10))
+    const today = new Date().toISOString().slice(0, 10)
+    document.getElementById("date").setAttribute("max", today)
+    document.getElementById("date").setAttribute("value", today)
 </script>
 </html>
