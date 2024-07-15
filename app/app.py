@@ -1,6 +1,7 @@
 from flask import (
     Flask,
     render_template,
+    request
 )
 from . import db
 
@@ -11,8 +12,10 @@ db.init_app(app)
 def index():
     return render_template('index.html')
 
-@app.route('/game')
+@app.route('/game', methods=['GET', 'POST'])
 def game():
+    if request.method == 'POST':
+        app.logger.info(request.form)
     return render_template('game.html')
 
 @app.route('/user/<username>')

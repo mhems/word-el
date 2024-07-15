@@ -1,116 +1,119 @@
 <!DOCTYPE html>
+<title>Word-El</title>
 <html>
     <head>
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/styles.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/styles.css') }}">
     </head>
-<body>
+<body id="body">
     <h3 class="header">Word-El</h3>
     <label for="date" id="date-label">Pick a date:</label>
     <input type="date" id="date" name="date" min="2021-06-19" max="" value="">
+    <form id="form" method="post">
     <table>
         <tr class="row">
             <td class="cell">
-                <input type="text" id="r0-0" class="letter" maxlength="1" style="text-transform:uppercase">
+                <input type="text" name="r0-0" class="letter" maxlength="1" style="text-transform:uppercase" readonly="true" autofocus="true">
             </td>
             <td class="cell">
-                <input type="text" id="r0-1" class="letter" maxlength="1" style="text-transform:uppercase">
+                <input type="text" name="r0-1" class="letter" maxlength="1" style="text-transform:uppercase" readonly="true">
             </td>
             <td class="cell">
-                <input type="text" id="r0-2" class="letter" maxlength="1" style="text-transform:uppercase">
+                <input type="text" name="r0-2" class="letter" maxlength="1" style="text-transform:uppercase" readonly="true">
             </td>
             <td class="cell">
-                <input type="text" id="r0-3" class="letter" maxlength="1" style="text-transform:uppercase">
+                <input type="text" name="r0-3" class="letter" maxlength="1" style="text-transform:uppercase" readonly="true">
             </td>
             <td class="cell">
-                <input type="text" id="r0-4" class="letter" maxlength="1" style="text-transform:uppercase">
-            </td>
-        </tr>
-        <tr class="row">
-            <td class="cell">
-                <input type="text" id="r1-0" class="letter" maxlength="1" style="text-transform:uppercase">
-            </td>
-            <td class="cell">
-                <input type="text" id="r1-1" class="letter" maxlength="1" style="text-transform:uppercase">
-            </td>
-            <td class="cell">
-                <input type="text" id="r1-2" class="letter" maxlength="1" style="text-transform:uppercase">
-            </td>
-            <td class="cell">
-                <input type="text" id="r1-3" class="letter" maxlength="1" style="text-transform:uppercase">
-            </td>
-            <td class="cell">
-                <input type="text" id="r1-4" class="letter" maxlength="1" style="text-transform:uppercase">
+                <input type="text" name="r0-4" class="letter" maxlength="1" style="text-transform:uppercase" readonly="true">
             </td>
         </tr>
         <tr class="row">
             <td class="cell">
-                <input type="text" id="r2-0" class="letter" maxlength="1" style="text-transform:uppercase">
+                <input type="text" name="r1-0" class="letter" maxlength="1" style="text-transform:uppercase" readonly="true">
             </td>
             <td class="cell">
-                <input type="text" id="r2-1" class="letter" maxlength="1" style="text-transform:uppercase">
+                <input type="text" name="r1-1" class="letter" maxlength="1" style="text-transform:uppercase" readonly="true">
             </td>
             <td class="cell">
-                <input type="text" id="r2-2" class="letter" maxlength="1" style="text-transform:uppercase">
+                <input type="text" name="r1-2" class="letter" maxlength="1" style="text-transform:uppercase" readonly="true">
             </td>
             <td class="cell">
-                <input type="text" id="r2-3" class="letter" maxlength="1" style="text-transform:uppercase">
+                <input type="text" name="r1-3" class="letter" maxlength="1" style="text-transform:uppercase" readonly="true">
             </td>
             <td class="cell">
-                <input type="text" id="r2-4" class="letter" maxlength="1" style="text-transform:uppercase">
-            </td>
-        </tr>
-        <tr class="row">
-            <td class="cell">
-                <input type="text" id="r3-0" class="letter" maxlength="1" style="text-transform:uppercase">
-            </td>
-            <td class="cell">
-                <input type="text" id="r3-1" class="letter" maxlength="1" style="text-transform:uppercase">
-            </td>
-            <td class="cell">
-                <input type="text" id="r3-2" class="letter" maxlength="1" style="text-transform:uppercase">
-            </td>
-            <td class="cell">
-                <input type="text" id="r3-3" class="letter" maxlength="1" style="text-transform:uppercase">
-            </td>
-            <td class="cell">
-                <input type="text" id="r3-4" class="letter" maxlength="1" style="text-transform:uppercase">
+                <input type="text" name="r1-4" class="letter" maxlength="1" style="text-transform:uppercase" readonly="true">
             </td>
         </tr>
         <tr class="row">
             <td class="cell">
-                <input type="text" id="r4-0" class="letter" maxlength="1" style="text-transform:uppercase">
+                <input type="text" name="r2-0" class="letter" maxlength="1" style="text-transform:uppercase" readonly="true">
             </td>
             <td class="cell">
-                <input type="text" id="r4-1" class="letter" maxlength="1" style="text-transform:uppercase">
+                <input type="text" name="r2-1" class="letter" maxlength="1" style="text-transform:uppercase" readonly="true">
             </td>
             <td class="cell">
-                <input type="text" id="r4-2" class="letter" maxlength="1" style="text-transform:uppercase">
+                <input type="text" name="r2-2" class="letter" maxlength="1" style="text-transform:uppercase" readonly="true">
             </td>
             <td class="cell">
-                <input type="text" id="r4-3" class="letter" maxlength="1" style="text-transform:uppercase">
+                <input type="text" name="r2-3" class="letter" maxlength="1" style="text-transform:uppercase" readonly="true">
             </td>
             <td class="cell">
-                <input type="text" id="r4-4" class="letter" maxlength="1" style="text-transform:uppercase">
+                <input type="text" name="r2-4" class="letter" maxlength="1" style="text-transform:uppercase" readonly="true">
             </td>
         </tr>
         <tr class="row">
             <td class="cell">
-                <input type="text" id="r5-0" class="letter" maxlength="1" style="text-transform:uppercase">
+                <input type="text" name="r3-0" class="letter" maxlength="1" style="text-transform:uppercase" readonly="true">
             </td>
             <td class="cell">
-                <input type="text" id="r5-1" class="letter" maxlength="1" style="text-transform:uppercase">
+                <input type="text" name="r3-1" class="letter" maxlength="1" style="text-transform:uppercase" readonly="true">
             </td>
             <td class="cell">
-                <input type="text" id="r5-2" class="letter" maxlength="1" style="text-transform:uppercase">
+                <input type="text" name="r3-2" class="letter" maxlength="1" style="text-transform:uppercase" readonly="true">
             </td>
             <td class="cell">
-                <input type="text" id="r5-3" class="letter" maxlength="1" style="text-transform:uppercase">
+                <input type="text" name="r3-3" class="letter" maxlength="1" style="text-transform:uppercase" readonly="true">
             </td>
             <td class="cell">
-                <input type="text" id="r5-4" class="letter" maxlength="1" style="text-transform:uppercase">
+                <input type="text" name="r3-4" class="letter" maxlength="1" style="text-transform:uppercase" readonly="true">
+            </td>
+        </tr>
+        <tr class="row">
+            <td class="cell">
+                <input type="text" name="r4-0" class="letter" maxlength="1" style="text-transform:uppercase" readonly="true">
+            </td>
+            <td class="cell">
+                <input type="text" name="r4-1" class="letter" maxlength="1" style="text-transform:uppercase" readonly="true">
+            </td>
+            <td class="cell">
+                <input type="text" name="r4-2" class="letter" maxlength="1" style="text-transform:uppercase" readonly="true">
+            </td>
+            <td class="cell">
+                <input type="text" name="r4-3" class="letter" maxlength="1" style="text-transform:uppercase" readonly="true">
+            </td>
+            <td class="cell">
+                <input type="text" name="r4-4" class="letter" maxlength="1" style="text-transform:uppercase" readonly="true">
+            </td>
+        </tr>
+        <tr class="row">
+            <td class="cell">
+                <input type="text" name="r5-0" class="letter" maxlength="1" style="text-transform:uppercase" readonly="true">
+            </td>
+            <td class="cell">
+                <input type="text" name="r5-1" class="letter" maxlength="1" style="text-transform:uppercase" readonly="true">
+            </td>
+            <td class="cell">
+                <input type="text" name="r5-2" class="letter" maxlength="1" style="text-transform:uppercase" readonly="true">
+            </td>
+            <td class="cell">
+                <input type="text" name="r5-3" class="letter" maxlength="1" style="text-transform:uppercase" readonly="true">
+            </td>
+            <td class="cell">
+                <input type="text" name="r5-4" class="letter" maxlength="1" style="text-transform:uppercase" readonly="true">
             </td>
         </tr>
     </table>
+    </form>
     <div id="keyboard">
         <table>
             <tr>
@@ -138,7 +141,7 @@
                 <td class="key"><button id="l" type="button" class="key_button">L</button></td>
             </tr>
             <tr>
-                <td class="key" colspan="2"><button id="enter" type="submit" class="key_button">ENTER</button></td>
+                <td class="key" colspan="2"><button id="enter" class="key_button">ENTER</button></td>
                 <td class="key"><button id="z" type="button" class="key_button">Z</button></td>
                 <td class="key"><button id="x" type="button" class="key_button">X</button></td>
                 <td class="key"><button id="c" type="button" class="key_button">C</button></td>
@@ -151,9 +154,42 @@
         </table>
     </div>
 </body>
-<script>
+<script>   
     const today = new Date().toISOString().slice(0, 10)
     document.getElementById("date").setAttribute("max", today)
     document.getElementById("date").setAttribute("value", today)
+    row = 0
+    col = 0
+
+    function handleKey(event) {
+        if (event.key.match(/^[a-z]$/)) {
+            if (col >= 0 && col <= 4) {
+                document.getElementsByName(get_input(row, col))[0].focus()
+                document.getElementsByName(get_input(row, col))[0].value = event.key
+                col++
+                document.getElementsByName(get_input(row, col))[0].focus()
+                document.getElementsByName(get_input(row, col))[0].value = ""
+            }
+        } else if (event.key == "Backspace" || event.key == "Delete") {
+            if (col >= 0) {
+                if (col > 0) {
+                    col--
+                }
+                document.getElementsByName(get_input(row, col))[0].focus()
+                document.getElementsByName(get_input(row, col))[0].value = ""
+            }
+        } else if (event.key == "Enter") {
+            if (col == 5) {
+                document.getElementById("form").requestSubmit()
+                row++
+            }
+        }
+    }
+
+    document.addEventListener("keyup", handleKey)
+
+    function get_input(r, c) {
+        return `r${r}-${c}`
+    }
 </script>
 </html>
