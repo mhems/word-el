@@ -3,10 +3,12 @@ from flask import (
     render_template,
     request
 )
-from . import db
+from db import (
+    init_app        
+)
 
 app = Flask('word-el')
-db.init_app(app)
+init_app(app)
 
 @app.route('/')
 def index():
