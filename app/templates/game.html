@@ -155,7 +155,7 @@
     </div>
 </body>
 <script>   
-    const today = new Date().toISOString().slice(0, 10)
+    const today = get_today()
     document.getElementById("date").setAttribute("max", today)
     document.getElementById("date").setAttribute("value", today)
     row = 0
@@ -190,6 +190,11 @@
 
     function get_input(r, c) {
         return `r${r}-${c}`
+    }
+
+    function get_today() {
+        let date = new Date()
+        return `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`
     }
 </script>
 </html>
