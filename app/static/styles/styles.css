@@ -32,6 +32,15 @@ table {
     font-family: "Lucida Console", "Courier New", monospace;
     font-size: 2em;
     text-align: center;
+    &.absent {
+        background-color: rgb(109, 109, 109);
+    }
+    &.present {
+        background-color: gold;
+    }
+    &.correct {
+        background-color: lightgreen;
+    }
 }
 
 #date-label {

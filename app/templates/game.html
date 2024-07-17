@@ -10,151 +10,57 @@
     <input type="date" id="date" name="date" min="2021-06-19" max="" value="">
     <form id="form" method="post">
     <table>
-        <tr class="row">
-            <td class="cell">
-                <input type="text" name="r0-0" class="letter" maxlength="1" style="text-transform:uppercase" readonly="true" autofocus="true">
-            </td>
-            <td class="cell">
-                <input type="text" name="r0-1" class="letter" maxlength="1" style="text-transform:uppercase" readonly="true">
-            </td>
-            <td class="cell">
-                <input type="text" name="r0-2" class="letter" maxlength="1" style="text-transform:uppercase" readonly="true">
-            </td>
-            <td class="cell">
-                <input type="text" name="r0-3" class="letter" maxlength="1" style="text-transform:uppercase" readonly="true">
-            </td>
-            <td class="cell">
-                <input type="text" name="r0-4" class="letter" maxlength="1" style="text-transform:uppercase" readonly="true">
-            </td>
-        </tr>
-        <tr class="row">
-            <td class="cell">
-                <input type="text" name="r1-0" class="letter" maxlength="1" style="text-transform:uppercase" readonly="true">
-            </td>
-            <td class="cell">
-                <input type="text" name="r1-1" class="letter" maxlength="1" style="text-transform:uppercase" readonly="true">
-            </td>
-            <td class="cell">
-                <input type="text" name="r1-2" class="letter" maxlength="1" style="text-transform:uppercase" readonly="true">
-            </td>
-            <td class="cell">
-                <input type="text" name="r1-3" class="letter" maxlength="1" style="text-transform:uppercase" readonly="true">
-            </td>
-            <td class="cell">
-                <input type="text" name="r1-4" class="letter" maxlength="1" style="text-transform:uppercase" readonly="true">
-            </td>
-        </tr>
-        <tr class="row">
-            <td class="cell">
-                <input type="text" name="r2-0" class="letter" maxlength="1" style="text-transform:uppercase" readonly="true">
-            </td>
-            <td class="cell">
-                <input type="text" name="r2-1" class="letter" maxlength="1" style="text-transform:uppercase" readonly="true">
-            </td>
-            <td class="cell">
-                <input type="text" name="r2-2" class="letter" maxlength="1" style="text-transform:uppercase" readonly="true">
-            </td>
-            <td class="cell">
-                <input type="text" name="r2-3" class="letter" maxlength="1" style="text-transform:uppercase" readonly="true">
-            </td>
-            <td class="cell">
-                <input type="text" name="r2-4" class="letter" maxlength="1" style="text-transform:uppercase" readonly="true">
-            </td>
-        </tr>
-        <tr class="row">
-            <td class="cell">
-                <input type="text" name="r3-0" class="letter" maxlength="1" style="text-transform:uppercase" readonly="true">
-            </td>
-            <td class="cell">
-                <input type="text" name="r3-1" class="letter" maxlength="1" style="text-transform:uppercase" readonly="true">
-            </td>
-            <td class="cell">
-                <input type="text" name="r3-2" class="letter" maxlength="1" style="text-transform:uppercase" readonly="true">
-            </td>
-            <td class="cell">
-                <input type="text" name="r3-3" class="letter" maxlength="1" style="text-transform:uppercase" readonly="true">
-            </td>
-            <td class="cell">
-                <input type="text" name="r3-4" class="letter" maxlength="1" style="text-transform:uppercase" readonly="true">
-            </td>
-        </tr>
-        <tr class="row">
-            <td class="cell">
-                <input type="text" name="r4-0" class="letter" maxlength="1" style="text-transform:uppercase" readonly="true">
-            </td>
-            <td class="cell">
-                <input type="text" name="r4-1" class="letter" maxlength="1" style="text-transform:uppercase" readonly="true">
-            </td>
-            <td class="cell">
-                <input type="text" name="r4-2" class="letter" maxlength="1" style="text-transform:uppercase" readonly="true">
-            </td>
-            <td class="cell">
-                <input type="text" name="r4-3" class="letter" maxlength="1" style="text-transform:uppercase" readonly="true">
-            </td>
-            <td class="cell">
-                <input type="text" name="r4-4" class="letter" maxlength="1" style="text-transform:uppercase" readonly="true">
-            </td>
-        </tr>
-        <tr class="row">
-            <td class="cell">
-                <input type="text" name="r5-0" class="letter" maxlength="1" style="text-transform:uppercase" readonly="true">
-            </td>
-            <td class="cell">
-                <input type="text" name="r5-1" class="letter" maxlength="1" style="text-transform:uppercase" readonly="true">
-            </td>
-            <td class="cell">
-                <input type="text" name="r5-2" class="letter" maxlength="1" style="text-transform:uppercase" readonly="true">
-            </td>
-            <td class="cell">
-                <input type="text" name="r5-3" class="letter" maxlength="1" style="text-transform:uppercase" readonly="true">
-            </td>
-            <td class="cell">
-                <input type="text" name="r5-4" class="letter" maxlength="1" style="text-transform:uppercase" readonly="true">
-            </td>
-        </tr>
+        {% for row in range(6) %}
+            <tr class="row" id="row{{row}}">
+                {% for col in range(5) %}
+                    <td class="cell">
+                        {% if row == 0 and col == 0 %}
+                            <input type="text" name="r{{row}}-{{col}}" class="letter" maxlength="1" style="text-transform:uppercase" readonly="true" autofocus="true">
+                        {% else %}
+                            <input type="text" name="r{{row}}-{{col}}" class="letter" maxlength="1" style="text-transform:uppercase" readonly="true">
+                        {% endif %}                    
+                    </td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
     </table>
     </form>
     <div id="keyboard">
         <table>
             <tr>
-                <td class="key"><button id="q" type="button" class="key_button">Q</button></td>
-                <td class="key"><button id="w" type="button" class="key_button">W</button></td>
-                <td class="key"><button id="e" type="button" class="key_button">E</button></td>
-                <td class="key"><button id="r" type="button" class="key_button">R</button></td>
-                <td class="key"><button id="t" type="button" class="key_button">T</button></td>
-                <td class="key"><button id="y" type="button" class="key_button">Y</button></td>
-                <td class="key"><button id="u" type="button" class="key_button">U</button></td>
-                <td class="key"><button id="i" type="button" class="key_button">I</button></td>
-                <td class="key"><button id="o" type="button" class="key_button">O</button></td>
-                <td class="key"><button id="p" type="button" class="key_button">P</button></td>
+                {% for letter in 'qwertyuiop' %}
+                    {% if g.keys and letter in g.keys %}
+                        <td class="key"><button id="{{letter}}" type="button" class="key_button {{g.keys[letter]}}">{{letter.upper()}}</button></td>
+                    {% else %}
+                        <td class="key"><button id="{{letter}}" type="button" class="key_button">{{letter.upper()}}</button></td>
+                    {% endif %}
+                {% endfor %}
             </tr>
             <tr>
                 <td class="fill"></td>
-                <td class="key"><button id="a" type="button" class="key_button">A</button></td>
-                <td class="key"><button id="s" type="button" class="key_button">S</button></td>
-                <td class="key"><button id="d" type="button" class="key_button">D</button></td>
-                <td class="key"><button id="f" type="button" class="key_button">F</button></td>
-                <td class="key"><button id="g" type="button" class="key_button">G</button></td>
-                <td class="key"><button id="h" type="button" class="key_button">H</button></td>
-                <td class="key"><button id="j" type="button" class="key_button">J</button></td>
-                <td class="key"><button id="k" type="button" class="key_button">K</button></td>
-                <td class="key"><button id="l" type="button" class="key_button">L</button></td>
+                {% for letter in 'asdfghjkl' %}
+                    {% if g.keys and letter in g.keys %}
+                        <td class="key"><button id="{{letter}}" type="button" class="key_button {{g.keys[letter]}}">{{letter.upper()}}</button></td>
+                    {% else %}
+                        <td class="key"><button id="{{letter}}" type="button" class="key_button">{{letter.upper()}}</button></td>
+                    {% endif %}
+                {% endfor %}
             </tr>
             <tr>
                 <td class="key" colspan="2"><button id="enter" class="key_button">ENTER</button></td>
-                <td class="key"><button id="z" type="button" class="key_button">Z</button></td>
-                <td class="key"><button id="x" type="button" class="key_button">X</button></td>
-                <td class="key"><button id="c" type="button" class="key_button">C</button></td>
-                <td class="key"><button id="v" type="button" class="key_button">V</button></td>
-                <td class="key"><button id="b" type="button" class="key_button">B</button></td>
-                <td class="key"><button id="n" type="button" class="key_button">N</button></td>
-                <td class="key"><button id="m" type="button" class="key_button">M</button></td>
+                {% for letter in 'zxcvbnm' %}
+                    {% if g.keys and letter in g.keys %}
+                        <td class="key"><button id="{{letter}}" type="button" class="key_button {{g.keys[letter]}}">{{letter.upper()}}</button></td>
+                    {% else %}
+                        <td class="key"><button id="{{letter}}" type="button" class="key_button">{{letter.upper()}}</button></td>
+                    {% endif %}
+                {% endfor %}
                 <td class="key" colspan="2"><button id="backspace" class="key_button">⌫</button></td>
             </tr>
         </table>
     </div>
 </body>
-<script>   
+<script>
     const today = get_today()
     document.getElementById("date").setAttribute("max", today)
     document.getElementById("date").setAttribute("value", today)
