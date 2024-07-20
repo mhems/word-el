@@ -26,3 +26,8 @@ CREATE TABLE solve (
   FOREIGN KEY (user_id) REFERENCES user (id),
   FOREIGN KEY (puzzle_id) REFERENCES puzzle (id)
 );
+
+CREATE TABLE acceptable (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  word TEXT NOT NULL
+)

@@ -14,11 +14,11 @@
             <tr class="row" id="row{{row}}">
                 {% for col in range(5) %}
                     <td class="cell">
-                        {% if row == 0 and col == 0 %}
-                            <input type="text" name="r{{row}}-{{col}}" class="letter" maxlength="1" style="text-transform:uppercase" readonly="true" autofocus="true">
+                        {% if col == 0 and row == current_row %}
+                            <input type="text" name="r{{row}}-{{col}}" class="letter {{row_keys[row][guesses[row][col]]}}" maxlength="1" style="text-transform:uppercase" readonly="true" value="{{guesses[row][col]}}" autofocus="true">
                         {% else %}
-                            <input type="text" name="r{{row}}-{{col}}" class="letter" maxlength="1" style="text-transform:uppercase" readonly="true">
-                        {% endif %}                    
+                            <input type="text" name="r{{row}}-{{col}}" class="letter {{row_keys[row][guesses[row][col]]}}" maxlength="1" style="text-transform:uppercase" readonly="true" value="{{guesses[row][col]}}">
+                        {% endif %}
                     </td>
                 {% endfor %}
             </tr>
@@ -29,18 +29,14 @@
         <table>
             <tr>
                 {% for letter in 'qwertyuiop' %}
-                    {% if g.keys and letter in g.keys %}
-                        <td class="key"><button id="{{letter}}" type="button" class="key_button {{g.keys[letter]}}">{{letter.upper()}}</button></td>
-                    {% else %}
-                        <td class="key"><button id="{{letter}}" type="button" class="key_button">{{letter.upper()}}</button></td>
-                    {% endif %}
+                    <td class="key"><button id="{{letter}}" type="button" class="key_button {{keys[letter]}}">{{letter.upper()}}</button></td>
                 {% endfor %}
             </tr>
             <tr>
                 <td class="fill"></td>
                 {% for letter in 'asdfghjkl' %}
-                    {% if g.keys and letter in g.keys %}
-                        <td class="key"><button id="{{letter}}" type="button" class="key_button {{g.keys[letter]}}">{{letter.upper()}}</button></td>
+                    {% if letter in keys %}
+                        <td class="key"><button id="{{letter}}" type="button" class="key_button {{keys[letter]}}">{{letter.upper()}}</button></td>
                     {% else %}
                         <td class="key"><button id="{{letter}}" type="button" class="key_button">{{letter.upper()}}</button></td>
                     {% endif %}
@@ -49,8 +45,8 @@
             <tr>
                 <td class="key" colspan="2"><button id="enter" class="key_button">ENTER</button></td>
                 {% for letter in 'zxcvbnm' %}
-                    {% if g.keys and letter in g.keys %}
-                        <td class="key"><button id="{{letter}}" type="button" class="key_button {{g.keys[letter]}}">{{letter.upper()}}</button></td>
+                    {% if letter in keys %}
+                        <td class="key"><button id="{{letter}}" type="button" class="key_button {{keys[letter]}}">{{letter.upper()}}</button></td>
                     {% else %}
                         <td class="key"><button id="{{letter}}" type="button" class="key_button">{{letter.upper()}}</button></td>
                     {% endif %}
@@ -64,8 +60,10 @@
     const today = get_today()
     document.getElementById("date").setAttribute("max", today)
     document.getElementById("date").setAttribute("value", today)
-    row = 0
     col = 0
+    row = 0
+    const match = document.querySelectorAll("input[autofocus='true']")[0];
+    row = parseInt(match.getAttribute('name').charAt(1))
 
     function handleKey(event) {
         if (event.key.match(/^[a-z]$/)) {
@@ -86,8 +84,11 @@
             }
         } else if (event.key == "Enter") {
             if (col == 5) {
-                document.getElementById("form").requestSubmit()
+                let form = document.getElementById("form")
+                form.requestSubmit()
+                form.reset()
                 row++
+                col = 0
             }
         }
     }

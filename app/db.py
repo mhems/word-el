@@ -37,6 +37,14 @@ def add_puzzle(puzzle, commit: bool = False):
     if commit:
         db.commit()
 
+def add_word(word: str):
+    db = get_db()
+    db.execute('INSERT INTO acceptable (word) VALUES (:word)', [word])
+
+def acceptable(word: str):
+    db = get_db()
+    return db.execute('SELECT * FROM acceptable WHERE word = ?', [word]).fetchone() is not None
+
 @click.command('seed-db')
 def seed_db():
     db = get_db()
@@ -46,6 +54,14 @@ def seed_db():
             if len(tokens) < 5:
                 tokens.append('')
             add_puzzle(tokens)
+    db.commit()
+
+@click.command('seed-accepted')
+def seed_accepted():
+    with open('db/accepted.txt', 'r') as fp:
+        for line in fp.readlines():
+            add_word(line.strip())
+    db = get_db()
     db.commit()
 
 @click.command('add-user')
@@ -85,3 +101,4 @@ def init_app(app):
     app.cli.add_command(seed_db)
     app.cli.add_command(sync_db)
     app.cli.add_command(add_user)
+    app.cli.add_command(seed_accepted)
