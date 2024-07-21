@@ -53,6 +53,13 @@ table {
     }
 }
 
+.flash {
+    margin: 1em 0;
+    padding: 1em;
+    background: #cae6f6;
+    border: 1px solid #377ba8;
+}
+
 #date-label {
     font-size: 1em;
 }

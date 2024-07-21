@@ -6,9 +6,12 @@
     </head>
 <body id="body">
     <h3 class="header">Word-El</h3>
+    {% for message in get_flashed_messages() %}
+        <div class="flash">{{message}}</div>
+    {% endfor %}
     <label for="date" id="date-label">Pick a date:</label>
-    <input type="date" id="date" name="date" min="2021-06-19" max="" value="">
     <form id="form" method="post">
+    <input type="date" id="date" name="date" min="2021-06-19" max="" value="{{date}}">
     <table>
         {% for row in range(6) %}
             <tr class="row" id="row{{row}}">
@@ -59,41 +62,67 @@
 <script>
     const today = get_today()
     document.getElementById("date").setAttribute("max", today)
-    document.getElementById("date").setAttribute("value", today)
     col = 0
     row = 0
     const match = document.querySelectorAll("input[autofocus='true']")[0];
     row = parseInt(match.getAttribute('name').charAt(1))
 
+    function submit() {
+        if (col == 5) {
+            let form = document.getElementById("form")
+            form.requestSubmit()
+            form.reset()
+            row++
+            col = 0
+        }
+    }
+
+    function backspace() {
+        if (col >= 0) {
+            if (col > 0) {
+                col--
+            }
+            document.getElementsByName(get_input(row, col))[0].focus()
+            document.getElementsByName(get_input(row, col))[0].value = ""
+        }
+    }
+
+    function advance(letter) {
+        if (col >= 0 && col <= 4) {
+            document.getElementsByName(get_input(row, col))[0].focus()
+            document.getElementsByName(get_input(row, col))[0].value = letter
+            col++
+            document.getElementsByName(get_input(row, col))[0].focus()
+            document.getElementsByName(get_input(row, col))[0].value = ""
+        }
+    }
+
     function handleKey(event) {
         if (event.key.match(/^[a-z]$/)) {
-            if (col >= 0 && col <= 4) {
-                document.getElementsByName(get_input(row, col))[0].focus()
-                document.getElementsByName(get_input(row, col))[0].value = event.key
-                col++
-                document.getElementsByName(get_input(row, col))[0].focus()
-                document.getElementsByName(get_input(row, col))[0].value = ""
-            }
+            advance(event.key)
         } else if (event.key == "Backspace" || event.key == "Delete") {
-            if (col >= 0) {
-                if (col > 0) {
-                    col--
-                }
-                document.getElementsByName(get_input(row, col))[0].focus()
-                document.getElementsByName(get_input(row, col))[0].value = ""
-            }
+            backspace()
         } else if (event.key == "Enter") {
-            if (col == 5) {
-                let form = document.getElementById("form")
-                form.requestSubmit()
-                form.reset()
-                row++
-                col = 0
-            }
+            submit()
         }
     }
 
     document.addEventListener("keyup", handleKey)
+
+    function handleButton(event) {
+        let element = event.target
+        if (element.id == "enter") {
+            submit()
+        } else if (element.id == "backspace") {
+            backspace()
+        } else {
+            advance(element.id)
+        }
+    }
+
+    document.querySelectorAll("button.key_button").forEach( (element) => {
+        element.onclick = handleButton
+    })
 
     function get_input(r, c) {
         return `r${r}-${c}`
