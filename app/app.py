@@ -5,13 +5,16 @@ from flask import (
     redirect,
     url_for,
     session,
-    flash
+    flash,
+    g,
+    Blueprint,
 )
 from db import (
     init_app,
     get,
-    acceptable
+    acceptable,
 )
+from auth import bp
 from wordle import (
     score,
     Score,
@@ -29,16 +32,17 @@ classes = {Score.PRESENT: 'present', Score.ABSENT: 'absent', Score.CORRECT: 'cor
 app = Flask('word-el')
 app.config['SECRET_KEY'] = 'dev'
 init_app(app)
+app.register_blueprint(bp)
 
 @app.route('/')
 def index():
     return render_template('index.html')
 
-def get_words(inputs: {str: str}):
-    return [''.join(inputs['r%d-%d' % (row, col)].upper() for col in range(5)) for row in range(6)]
-
 @app.route('/game', methods=['GET', 'POST'])
 def game():
+    def get_words(inputs: {str: str}):
+        return [''.join(inputs['r%d-%d' % (row, col)].upper() for col in range(5)) for row in range(6)]
+
     if request.method == 'POST':
         date = Date(*map(int, request.form['date'].split('-')))
         answer = get(date)['solution']

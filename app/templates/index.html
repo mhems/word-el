@@ -1,1 +1,9 @@
-hello world!
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Welcome{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <a href="{{ url_for('game') }}">Play</a>
+{% endblock %}

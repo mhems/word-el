@@ -1,14 +1,11 @@
-<!DOCTYPE html>
-<title>Word-El</title>
-<html>
-    <head>
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/styles.css') }}">
-    </head>
-<body id="body">
-    <h3 class="header">Word-El</h3>
-    {% for message in get_flashed_messages() %}
-        <div class="flash">{{message}}</div>
-    {% endfor %}
+
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Play{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
     <label for="date" id="date-label">Pick a date:</label>
     <form id="form" method="post">
     <input type="date" id="date" name="date" min="2021-06-19" max="" value="{{date}}">
@@ -58,7 +55,7 @@
             </tr>
         </table>
     </div>
-</body>
+
 <script>
     const today = get_today()
     document.getElementById("date").setAttribute("max", today)
@@ -136,4 +133,4 @@
         return `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`
     }
 </script>
-</html>
+{% endblock %}

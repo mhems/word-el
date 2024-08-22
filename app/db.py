@@ -4,6 +4,7 @@ from datetime import date as Date
 from datetime import timedelta as td
 import requests
 from flask import current_app, g
+from werkzeug.security import generate_password_hash
 
 DB = 'db/db.sqlite'
 SCHEMA = 'db/schema.sql'
@@ -64,12 +65,22 @@ def seed_accepted():
     db = get_db()
     db.commit()
 
-@click.command('add-user')
-@click.argument('username')
-def add_user(username):
+def add_user(username, password):
     db = get_db()
-    db.execute('INSERT INTO user (username) VALUES (?)', [username])
+    if get_user_by_name(username) is not None:
+        return f'User {username} already exists'
+    db.execute('INSERT INTO user (username, password) VALUES (?, ?)',
+        [username, password])
     db.commit()
+    return None
+
+def get_user_by_name(username):
+    db = get_db()
+    return db.execute('SELECT * FROM user WHERE username == ?', [username]).fetchone()
+
+def get_user_by_id(id_):
+    db = get_db()
+    return db.execute('SELECT * FROM user WHERE id == ?', [id_]).fetchone()
 
 def get(date: Date = None) -> dict:
     URL = 'https://www.nytimes.com/svc/wordle/v2/{}.json'
@@ -100,5 +111,4 @@ def init_app(app):
     app.cli.add_command(init_db)
     app.cli.add_command(seed_db)
     app.cli.add_command(sync_db)
-    app.cli.add_command(add_user)
     app.cli.add_command(seed_accepted)
