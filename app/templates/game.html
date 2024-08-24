@@ -6,6 +6,7 @@
 {% endblock %}
 
 {% block content %}
+
     <label for="date" id="date-label">Pick a date:</label>
     <form id="form" method="post">
     <input type="date" id="date" name="date" min="2021-06-19" max="{{max_date}}" value="{{date}}">
@@ -57,6 +58,9 @@
     </div>
 
 <script>
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    window.alert(tz)
+
     col = 0
     row = 0
     const match = document.querySelectorAll("input[autofocus='true']")[0];
