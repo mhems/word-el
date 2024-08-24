@@ -9,7 +9,7 @@
 
     <label for="date" id="date-label">Pick a date:</label>
     <form id="form" method="post">
-    <input type="date" id="date" name="date" min="2021-06-19" max="{{max_date}}" value="{{date}}">
+    <input type="date" id="date" name="date" min="2021-06-19" max="" value="{{date}}">
     <table>
         {% for row in range(6) %}
             <tr class="row" id="row{{row}}">
@@ -58,8 +58,11 @@
     </div>
 
 <script>
-    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    window.alert(tz)
+    var timeUtc = new Date();
+    var timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    var zoneTime = new Date(timeUtc.toLocaleString(undefined, { timeZone }))
+    var dateString = `${zoneTime.getFullYear()}-${String(zoneTime.getMonth()+1).padStart(2, "0")}-${String(zoneTime.getDate()).padStart(2, "0")}`
+    document.getElementById("date").setAttribute("max", dateString)
 
     col = 0
     row = 0
