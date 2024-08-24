@@ -70,12 +70,17 @@
     if (!document.getElementById("date").getAttribute("value")) {
         document.getElementById("date").setAttribute("value", dateString)
     }
-        
+
     col = 0
     row = 0
     const match = document.querySelectorAll("input[autofocus='true']")[0];
-    match.focus()
     row = parseInt(match.getAttribute('name').charAt(1))
+
+    const body = document.body;
+    body.addEventListener('click', e => {
+      match.focus()
+    });
+    body.click()
 
     function submit() {
         if (col == 5) {
