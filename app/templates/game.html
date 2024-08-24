@@ -8,7 +8,7 @@
 {% block content %}
     <label for="date" id="date-label">Pick a date:</label>
     <form id="form" method="post">
-    <input type="date" id="date" name="date" min="2021-06-19" max="" value="{{date}}">
+    <input type="date" id="date" name="date" min="2021-06-19" max="{{max_date}}" value="{{date}}">
     <table>
         {% for row in range(6) %}
             <tr class="row" id="row{{row}}">
@@ -57,11 +57,6 @@
     </div>
 
 <script>
-    const today = get_today()
-    document.getElementById("date").setAttribute("max", today)
-    if (!document.getElementById("date").getAttribute("value")) {
-        document.getElementById("date").setAttribute("value", today)
-    }
     col = 0
     row = 0
     const match = document.querySelectorAll("input[autofocus='true']")[0];
@@ -126,11 +121,6 @@
 
     function get_input(r, c) {
         return `r${r}-${c}`
-    }
-
-    function get_today() {
-        let date = new Date()
-        return `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`
     }
 </script>
 {% endblock %}

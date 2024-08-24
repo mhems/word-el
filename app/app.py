@@ -92,8 +92,9 @@ def game():
     rows_keys = session.pop('row_keys', default_key_rows)
     current_row = session.pop('current_row', 0)
     guesses = session.pop('guesses', empty_guesses)
-    date = session.pop('date', today())
-    return render_template('game.html', keys=keys, row_keys=rows_keys, current_row=current_row, guesses=guesses, date=date)
+    max_date = today()
+    date = session.pop('date', max_date)
+    return render_template('game.html', keys=keys, row_keys=rows_keys, current_row=current_row, guesses=guesses, date=date, max_date=max_date)
 
 def today():
     return dt.now().isoformat()[:10]
