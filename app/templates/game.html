@@ -76,12 +76,6 @@
     const match = document.querySelectorAll("input[autofocus='true']")[0];
     row = parseInt(match.getAttribute('name').charAt(1))
 
-    const body = document.body;
-    body.addEventListener('click', e => {
-      match.focus()
-    });
-    body.click()
-
     function submit() {
         if (col == 5) {
             let form = document.getElementById("form")
