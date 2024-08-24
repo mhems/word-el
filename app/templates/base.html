@@ -4,6 +4,7 @@
 <nav>
   <h1>Word-El</h1>
   <ul>
+    <li><a href="{{ url_for('index') }}">Home</a></li>
     {% if g.user %}
       <li><span>{{ g.user['username'] }}</span>
       <li><a href="{{ url_for('auth.logout') }}">Log Out</a>
