@@ -92,11 +92,8 @@ def game():
     rows_keys = session.pop('row_keys', default_key_rows)
     current_row = session.pop('current_row', 0)
     guesses = session.pop('guesses', empty_guesses)
-    date = session.pop('date', today())
+    date = session.pop('date', None)
     return render_template('game.html', keys=keys, row_keys=rows_keys, current_row=current_row, guesses=guesses, date=date)
-
-def today():
-    return dt.now().isoformat()[:10]
 
 @app.route('/user/<username>')
 def show_user_profile(username):

@@ -9,7 +9,11 @@
 
     <label for="date" id="date-label">Pick a date:</label>
     <form id="form" method="post">
-    <input type="date" id="date" name="date" min="2021-06-19" max="" value="{{date}}">
+    {% if date %}
+      <input type="date" id="date" name="date" min="2021-06-19" value="{{date}}">
+    {% else %}
+      <input type="date" id="date" name="date" min="2021-06-19">
+    {% endif %}
     <table>
         {% for row in range(6) %}
             <tr class="row" id="row{{row}}">
@@ -63,7 +67,10 @@
     var zoneTime = new Date(timeUtc.toLocaleString(undefined, { timeZone }))
     var dateString = `${zoneTime.getFullYear()}-${String(zoneTime.getMonth()+1).padStart(2, "0")}-${String(zoneTime.getDate()).padStart(2, "0")}`
     document.getElementById("date").setAttribute("max", dateString)
-
+    if (!document.getElementById("date").getAttribute("value")) {
+        document.getElementById("date").setAttribute("value", dateString)
+    }
+        
     col = 0
     row = 0
     const match = document.querySelectorAll("input[autofocus='true']")[0];
