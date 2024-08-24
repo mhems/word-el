@@ -65,7 +65,7 @@ def seed_accepted():
     db = get_db()
     db.commit()
 
-def add_user(username, password):
+def add_user(username: str, password: str):
     db = get_db()
     if get_user_by_name(username) is not None:
         return f'User {username} already exists'
@@ -74,13 +74,47 @@ def add_user(username, password):
     db.commit()
     return None
 
-def get_user_by_name(username):
+def get_user_by_name(username: str):
     db = get_db()
     return db.execute('SELECT * FROM user WHERE username == ?', [username]).fetchone()
 
-def get_user_by_id(id_):
+def get_user_by_id(id_: int):
     db = get_db()
     return db.execute('SELECT * FROM user WHERE id == ?', [id_]).fetchone()
+
+def get_puzzle_by_id(id_: int):
+    db = get_db()
+    return db.execute('SELECT * FROM puzzle WHERE id == ?', [id_]).fetchone()
+
+def date_to_str(date: Date) -> str:
+    return date.strftime("%Y-%m-%d")
+
+def get_puzzle_by_date(date: Date):
+    db = get_db()
+    date_string = date_to_str(date)
+    return db.execute('SELECT * FROM puzzle WHERE print_date == ?',[date_string]).fetchone()
+
+def add_solve(user_id: int, date: Date, solved: bool, attempts: [str]):
+    db = get_db()
+    puzzle_id = get_puzzle_by_date(date)['id']
+    num_attempts = len(attempts)
+    values = [user_id, puzzle_id, int(solved), num_attempts]
+    values.extend(attempts)
+    values.extend([''] * (6 - num_attempts))
+    db.execute('INSERT into solve' +
+               '(user_id, puzzle_id, solved, num_attempts, ' +
+                'attempt1, attempt2, attempt3, attempt4, attempt5, attempt6) VALUES' +
+               '(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+               values)
+    db.commit()
+
+def get_solves():
+    db = get_db()
+    return db.execute('SELECT ' + 
+                        'username, print_date, solution, solved, num_attempts, ' +
+                        'attempt1, attempt2, attempt3, attempt4, attempt5, attempt6 ' +
+                      'FROM solve INNER JOIN user ON solve.user_id = user.id ' +
+                      'INNER JOIN puzzle ON solve.puzzle_id = puzzle.id').fetchall()
 
 def get(date: Date = None) -> dict:
     URL = 'https://www.nytimes.com/svc/wordle/v2/{}.json'

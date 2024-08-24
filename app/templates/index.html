@@ -5,5 +5,8 @@
 {% endblock %}
 
 {% block content %}
-  <a href="{{ url_for('game') }}">Play</a>
+  <ul>
+    <li><a href="{{ url_for('game') }}">Play</a></li>
+    <li><a href="{{ url_for('stats.stats') }}">Statistics</a></li>
+  </ul>
 {% endblock %}

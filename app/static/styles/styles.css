@@ -12,6 +12,12 @@ table {
     margin: 20px;
 }
 
+.data_table {
+    border-collapse: collapse;
+    border: 1px solid black;
+    padding: 5px;
+}
+
 .letter {
     background-color: white;
     width: 35px;

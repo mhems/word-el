@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Stats{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<table class="data_table">
+  <tr>
+  {% for col in columns %}
+      <th class="data_table">{{col}}</th>
+  {% endfor %}
+  </tr>
+  {% for row in solves %}
+  <tr>
+    {% for col in columns %}
+      <td class="data_table">{{row[col]}}</td>
+    {% endfor %}
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

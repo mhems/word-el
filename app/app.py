@@ -13,8 +13,10 @@ from db import (
     init_app,
     get,
     acceptable,
+    add_solve
 )
-from auth import bp
+from auth import auth_bp
+from stats import stats_bp
 from wordle import (
     score,
     Score,
@@ -32,7 +34,8 @@ classes = {Score.PRESENT: 'present', Score.ABSENT: 'absent', Score.CORRECT: 'cor
 app = Flask('word-el')
 app.config['SECRET_KEY'] = 'dev'
 init_app(app)
-app.register_blueprint(bp)
+app.register_blueprint(auth_bp)
+app.register_blueprint(stats_bp)
 
 @app.route('/')
 def index():
@@ -68,11 +71,15 @@ def game():
             if results and all(s == Score.CORRECT for s in results):
                 row = 7
                 flash('Well done!')
+                if g.user:
+                    add_solve(g.user['id'], date, True, [e.lower() for e in filled_in])
             elif row < 5:
                 row += 1
             else:
                 flash('Answer = ' + answer.upper())
                 row = 7
+                if g.user:
+                    add_solve(g.user['id'], date, False, guesses)
 
             session['keys'] = keys
             session['row_keys'] = rows_keys
