@@ -74,6 +74,7 @@
     col = 0
     row = 0
     const match = document.querySelectorAll("input[autofocus='true']")[0];
+    match.focus()
     row = parseInt(match.getAttribute('name').charAt(1))
 
     function submit() {
@@ -117,6 +118,7 @@
     }
 
     document.addEventListener("keyup", handleKey)
+    document.addEventListener("touchend", handleKey)
 
     function handleButton(event) {
         let element = event.target
