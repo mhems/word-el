@@ -4,7 +4,6 @@ from datetime import date as Date
 from datetime import timedelta as td
 import requests
 from flask import current_app, g
-from werkzeug.security import generate_password_hash
 
 DB = 'db/db.sqlite'
 SCHEMA = 'db/schema.sql'
